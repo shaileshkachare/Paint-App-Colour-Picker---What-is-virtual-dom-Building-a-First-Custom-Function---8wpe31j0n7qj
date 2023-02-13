@@ -23,31 +23,56 @@ const colourConfig = [{
 
 const title = 'Select the gradient and then the Box to change the color';
 
-const App = () => {
-  let [nextBackground, selectNextBackground] = useState({ background: "" })
-  const applyColor = (updateSelectionStyle) => {
-    updateSelectionStyle(nextBackground)
+// const App = () => {
+//   let [nextBackground, selectNextBackground] = useState({ background: "" })
+//   const applyColor = (updateSelectionStyle) => {
+//     updateSelectionStyle(nextBackground)
+//   }
+
+//   return (
+//     <div id="master">
+//       <h5 className="heading">{/* display title here */}</h5>
+
+//       <div className="row">
+//         {colourConfig.map((config, index) => (
+//           <ColourSelector key={config.key} config={config} selectNextBackground={selectNextBackground} />
+//         ))}
+//       </div>
+
+//       <div className='row' id="children-wrapper">
+//         {
+//           ["selection1", "selection2", "selection3"].map(key => (
+//             <Selection key={key} applyColor={applyColor} />
+//           ))
+//         }
+//       </div>
+//     </div >
+//   )
+// }
+class App extends React.Component{
+  constructor(){
+    super()
+    this.state={
+      selectedColor: ""
+    }
   }
-
-  return (
-    <div id="master">
-      <h5 className="heading">{/* display title here */}</h5>
-
-      <div className="row">
-        {colourConfig.map((config, index) => (
-          <ColourSelector key={config.key} config={config} selectNextBackground={selectNextBackground} />
-        ))}
+  updateSelectedColor=(color)=>{
+    this.setState({selectedColor: color})
+  }
+  render(){
+    let colors=["red","blue","green","yellow"]
+    return <div className='outer-div' style={{backgroundColor: this.state.selectedColor, height: "100vh"}}>
+     
+      <div className='container'>
+      {
+        colors.map(color=>{
+          return <Color color={color} name="Bhawna" updateSelectedColor={this.updateSelectedColor}></Color>
+        })
+      }
       </div>
-
-      <div className='row' id="children-wrapper">
-        {
-          ["selection1", "selection2", "selection3"].map(key => (
-            <Selection key={key} applyColor={applyColor} />
-          ))
-        }
-      </div>
-    </div >
-  )
+    </div>
+    
+  }
 }
 
 
