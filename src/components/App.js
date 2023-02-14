@@ -53,25 +53,40 @@ class App extends React.Component{
   constructor(){
     super()
     this.state={
-      selectedColor: ""
+      nextBackground: { background: "" }
     }
   }
-  updateSelectedColor=(color)=>{
-    this.setState({selectedColor: color})
+
+  selectNextBackground=(value)=>{
+    this.setState({nextBackground: value})
+  }
+
+  //ignore
+  applyColor = (updateSelectionStyle) =>{
+    updateSelectionStyle(this.state.nextBackground)
   }
   render(){
-    let colors=["red","blue","green","yellow"]
-    return <div className='outer-div' style={{backgroundColor: this.state.selectedColor, height: "100vh"}}>
-     
-      <div className='container'>
-      {
-        colors.map(color=>{
-          return <Color color={color} name="Bhawna" updateSelectedColor={this.updateSelectedColor}></Color>
-        })
-      }
-      </div>
-    </div>
-    
+    return (
+      <div id="master">
+        <h5 className="heading">{/* display title here */}</h5>
+        <div className="row">
+          {colourConfig.map((config, index) => (
+            <ColourSelector key={config.key} config={config} selectNextBackground={this.selectNextBackground} />
+          ))}
+        </div>
+  
+        <div className='row' id="children-wrapper">
+          {
+            ["selection1", "selection2", "selection3"].map(key => (
+              <Selection key={key} 
+              nextBackground={this.state.nextBackground}
+              //ignore
+              applyColor={this.applyColor} />
+            ))
+          }
+        </div>
+      </div >
+    )
   }
 }
 
