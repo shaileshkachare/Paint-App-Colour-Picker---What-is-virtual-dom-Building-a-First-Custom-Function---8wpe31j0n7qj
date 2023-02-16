@@ -11,21 +11,31 @@
 // }
 // export default ColourSelector;
 
-import React from "react";
+// import React from "react";
 
-class ColourSelector extends React.Component{
+// class ColourSelector extends React.Component{
 
-    // this.props.config, this.props.selectNextBackground
-    render(){
-      console.log(this.props);
-      return (
-        <button className={this.props.config.className} onClick={() => this.props.selectNextBackground({background: this.props.config.background})}>
-          {/* label should come here */}
-          {this.props.config.label}
-        </button>
-      )
-    }
-  }
-  
+//     // this.props.config, this.props.selectNextBackground
+//     render(){
+//       console.log(this.props);
+//       return (
+//         <button className={this.props.config.className} onClick={() => this.props.selectNextBackground({background: this.props.config.background})}>
+//           {/* label should come here */}
+//           {this.props.config.label}
+//         </button>
+//       )
+//     }
+//   }
+import React from 'react';
+
+const ColourSelector = (props) => {
+  const { config, selectNextBackground } = props
+  const { background } = config;
+  return (
+    <button className={props.config.classname} onClick={() => selectNextBackground({background: background})}>
+      {props.config.label}
+    </button>
+  )
+}
   
   export default ColourSelector;
